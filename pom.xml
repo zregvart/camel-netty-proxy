@@ -29,46 +29,6 @@
     <camel.version>3.0.0-M3</camel.version>
   </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.fabric8</groupId>
-        <artifactId>fabric8-maven-plugin</artifactId>
-        <version>4.1.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>resource</goal>
-              <goal>build</goal>
-              <goal>deploy</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <images>  
-            <image>
-              <name>${project.artifactId}:${project.version}</name>
-              <build>
-                <from>fabric8/s2i-java</from>
-                <ports>
-                  <port>8080</port>
-                </ports>
-                <assembly>
-                  <basedir>/deployments</basedir>
-                  <descriptorRef>artifact-with-dependencies</descriptorRef>
-                </assembly>
-                <env>
-                  <JAVA_LIB_DIR>/deployments</JAVA_LIB_DIR>
-                  <JAVA_MAIN_CLASS>com.github.zregvart.cnp.ProxyApp</JAVA_MAIN_CLASS>
-                </env>
-              </build>
-            </image>
-          </images>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.camel</groupId>
@@ -93,4 +53,60 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>container-build</id>
+      <activation>
+        <property>
+          <name>target</name>
+        </property>
+      </activation>
+      <build>
+        <finalName>${target}</finalName>
+      </build>
+    </profile>
+    <profile>
+      <id>openshift</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin</artifactId>
+            <version>4.1.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>resource</goal>
+                  <goal>build</goal>
+                  <goal>deploy</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <images>  
+                <image>
+                  <name>${project.artifactId}:${project.version}</name>
+                  <build>
+                    <from>fabric8/s2i-java</from>
+                    <ports>
+                      <port>8080</port>
+                    </ports>
+                    <assembly>
+                      <basedir>/deployments</basedir>
+                      <descriptorRef>artifact-with-dependencies</descriptorRef>
+                    </assembly>
+                    <env>
+                      <JAVA_LIB_DIR>/deployments</JAVA_LIB_DIR>
+                      <JAVA_MAIN_CLASS>com.github.zregvart.cnp.ProxyApp</JAVA_MAIN_CLASS>
+                    </env>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
