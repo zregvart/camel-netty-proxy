@@ -1,4 +1,4 @@
-[![Docker Repository on Quay](https://quay.io/repository/zregvart/camel-netty-proxy/status "Docker Repository on Quay")](https://quay.io/repository/zregvart/camel-netty-proxy) [![Docker Repository on Docker Hub](https://img.shields.io/docker/automated/zregvart/camel-netty-proxy.svg "Docker Repository on Docker Hub")](https://hub.docker.com/r/zregvart/camel-netty-proxy)
+[![Docker Repository on Quay](https://quay.io/repository/zregvart/camel-netty-proxy/status "Docker Repository on Quay")](https://quay.io/repository/zregvart/camel-netty-proxy) [![Docker Repository on Docker Hub](https://img.shields.io/docker/automated/zregvart/camel-netty-proxy.svg "Docker Repository on Docker Hub")](https://hub.docker.com/r/zregvart/camel-netty-proxy) [![CircleCI](https://circleci.com/gh/zregvart/camel-netty-proxy.svg?style=svg)](https://circleci.com/gh/zregvart/camel-netty-proxy)
 
 # Camel Netty Proxy example
 
