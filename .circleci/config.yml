@@ -6,5 +6,5 @@ orbs:
 workflows:
   Build:
     jobs:
-      - maven/test
-
+      - maven/test:
+          settings_file: settings.xml
