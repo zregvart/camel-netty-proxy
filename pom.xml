@@ -27,6 +27,7 @@
 
   <properties>
     <camel.version>3.0.0-M3</camel.version>
+    <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
   </properties>
 
   <dependencies>
@@ -84,7 +85,29 @@
               </execution>
             </executions>
             <configuration>
-              <images>  
+              <resources>
+                <labels>
+                  <service>
+                    <property>
+                      <name>discovery.3scale.net</name>
+                      <value>true</value>
+                    </property>
+                  </service>
+                </labels>
+                <annotations>
+                  <service>
+                    <property>
+                      <name>discovery.3scale.net/scheme</name>
+                      <value>proxy</value>
+                    </property>
+                    <property>
+                      <name>discovery.3scale.net/port</name>
+                      <value>8080</value>
+                    </property>
+                  </service>
+                </annotations>
+              </resources>
+              <images>
                 <image>
                   <name>${project.artifactId}:${project.version}</name>
                   <build>
