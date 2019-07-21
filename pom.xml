@@ -26,11 +26,29 @@
   <version>0.0.1</version>
 
   <properties>
-    <camel.version>3.0.0-M3</camel.version>
+    <camel.version>3.0.0-SNAPSHOT</camel.version>
     <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>apache</id>
+      <url>https://repository.apache.org/content/groups/snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <dependencies>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-main</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-core</artifactId>
