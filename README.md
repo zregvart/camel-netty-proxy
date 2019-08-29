@@ -34,5 +34,5 @@ To run on openshift, log in via the `oc login` command to the OpenShift cluster
 and position yourself in the project of choice using `oc project <project>` and
 run:
 
+    $ mvn -N io.takari:maven:wrapper
     $ ./mvnw -Popenshift package
-
