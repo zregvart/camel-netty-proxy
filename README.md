@@ -28,4 +28,11 @@ To test using `curl` set the `http_proxy` environment variable, for example:
 
     $ http_proxy=http://localhost:8080 curl -v http://neverssl.com
 
+## Running on OpenShift
+
+To run on openshift, log in via the `oc login` command to the OpenShift cluster
+and position yourself in the project of choice using `oc project <project>` and
+run:
+
+    $ ./mvnw -Popenshift package
 
