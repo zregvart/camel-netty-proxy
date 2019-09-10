@@ -31,7 +31,8 @@ public class ProxyRoute extends RouteBuilder {
             .toD("netty-http:"
                 + "${headers." + Exchange.HTTP_SCHEME + "}://"
                 + "${headers." + Exchange.HTTP_HOST + "}:"
-                + "${headers." + Exchange.HTTP_PORT + "}")
+                + "${headers." + Exchange.HTTP_PORT + "}"
+                + "${headers." + Exchange.HTTP_PATH + "}")
             .process(ProxyRoute::uppercase);
     }
 
