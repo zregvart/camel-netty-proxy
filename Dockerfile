@@ -1,7 +1,7 @@
 FROM maven:3-jdk-8 AS build
 WORKDIR /build
 COPY pom.xml ./
-RUN mvn -B -q dependency:go-offline
+RUN mvn -U -B -q dependency:go-offline
 COPY src src
 RUN mvn -B -q package -Dtarget=camel-netty-proxy
 RUN mvn -B -q package dependency:copy-dependencies
