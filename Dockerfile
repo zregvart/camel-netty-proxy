@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8 AS build
+FROM maven:3-jdk-11 AS build
 WORKDIR /build
 COPY pom.xml ./
 RUN mvn -U -B -q dependency:go-offline
@@ -6,7 +6,7 @@ COPY src src
 RUN mvn -B -q package -Dtarget=camel-netty-proxy
 RUN mvn -B -q package dependency:copy-dependencies
 
-FROM openjdk:8-jre
+FROM openjdk:11-jre
 WORKDIR /app
 VOLUME /tmp
 EXPOSE 8080
