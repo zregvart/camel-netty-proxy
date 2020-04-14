@@ -20,10 +20,13 @@ import org.apache.camel.main.Main;
 
 public class ProxyApp {
     public static void main(final String[] args) throws Exception {
-        try (Main main = new Main()) {
-            main.addRouteBuilder(new ProxyRoute());
+        final Main main = new Main();
+        try {
+            main.addRoutesBuilder(new ProxyRoute());
 
             main.run();
+        } finally {
+            main.stop();
         }
     }
 }
