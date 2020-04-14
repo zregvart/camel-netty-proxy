@@ -12,7 +12,13 @@ will be forwarded to the target service with the HTTP body converted to
 uppercase. The response from the target service will be processed by converting
 it to uppercase and returned to the client.
 
-There is no support for HTTP over TLS (`https`) protocol in this example.
+The support for HTTP over TLS (`https`) protocol is available if Java Keystore
+file is mounted at `/tls/keystore.jks` (with password `changeit`). The
+implementation doesn't support HTTPS proxy tunneling via `CONNECT`, the
+request needs to be issued same as it is issued for the HTTP PROXY, the only
+added benefit is that the request can be made over TLS.
+
+If `/tls/keystore.jks` exists then the listening port changes to `8443`.
 
 ## Building and running
 
@@ -36,3 +42,5 @@ run:
 
     $ ./mvnw -Popenshift package
 
+When running on OpenShift the service listens on port 8443 with TLS enabled.
+The certificate is issued by the OpenShift CA.
