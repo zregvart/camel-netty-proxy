@@ -18,7 +18,7 @@
   <parent>
     <groupId>org.basepom</groupId>
     <artifactId>basepom-oss</artifactId>
-    <version>28</version>
+    <version>32</version>
   </parent>
 
   <groupId>com.github.zregvart</groupId>
@@ -28,6 +28,7 @@
   <properties>
     <camel.version>3.2.0</camel.version>
     <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
+    <project.build.targetJdk>11</project.build.targetJdk>
   </properties>
 
   <dependencies>
@@ -59,6 +60,20 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.basepom.maven</groupId>
+        <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <configuration>
+          <ignoredResourcePatterns>
+            <ignoredResourcePattern>component.properties</ignoredResourcePattern>
+          </ignoredResourcePatterns>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <profiles>
     <profile>
