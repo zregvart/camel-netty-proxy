@@ -105,6 +105,18 @@
               </execution>
             </executions>
             <configuration>
+              <enricher>
+                <includes>
+                  <include>fmp-openshift-autotls</include>
+                </includes>
+                <config>
+                  <fmp-openshift-autotls>
+                    <tlsSecretName>camel-netty-proxy-tls</tlsSecretName>
+                    <tlsSecretVolumeName>camel-netty-proxy-tls-pem</tlsSecretVolumeName>
+                    <jksVolumeName>camel-netty-proxy-tls-jks</jksVolumeName>
+                  </fmp-openshift-autotls>
+                </config>
+              </enricher>
               <resources>
                 <labels>
                   <service>
@@ -122,18 +134,35 @@
                     </property>
                     <property>
                       <name>discovery.3scale.net/port</name>
-                      <value>8080</value>
+                      <value>8443</value>
+                    </property>
+                    <property>
+                      <name>service.beta.openshift.io/serving-cert-secret-name</name>
+                      <value>camel-netty-proxy-tls</value>
                     </property>
                   </service>
                 </annotations>
+                <volumes>
+                  <volume>
+                    <name>camel-netty-proxy-tls-pem</name>
+                    <type>secret</type>
+                    <secretName>camel-netty-proxy-tls</secretName>
+                  </volume>
+                  <volume>
+                    <name>camel-netty-proxy-tls-jks</name>
+                    <type>emptyDir</type>
+                    <medium>Memory</medium>
+                    <mounts>/tls</mounts>
+                  </volume>
+                </volumes>
               </resources>
               <images>
                 <image>
                   <name>${project.artifactId}:${project.version}</name>
                   <build>
-                    <from>fabric8/s2i-java</from>
+                    <from>fabric8/s2i-java:latest-java11</from>
                     <ports>
-                      <port>8080</port>
+                      <port>8443</port>
                     </ports>
                     <assembly>
                       <basedir>/deployments</basedir>
