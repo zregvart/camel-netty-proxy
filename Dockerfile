@@ -1,10 +1,11 @@
-FROM maven:3-jdk-11 AS build
+FROM openjdk:11 AS build
 WORKDIR /build
-COPY pom.xml ./
-RUN mvn -U -B -q dependency:go-offline
+COPY mvnw pom.xml srcdeps.yaml ./
+COPY .mvn ./.mvn/
+RUN ./mvnw -U -B -q dependency:go-offline
 COPY src src
-RUN mvn -B -q package -Dtarget=camel-netty-proxy
-RUN mvn -B -q package dependency:copy-dependencies
+RUN ./mvnw -B -q package -Dtarget=camel-netty-proxy
+RUN ./mvnw -B -q package dependency:copy-dependencies
 
 FROM openjdk:11-jre
 WORKDIR /app
