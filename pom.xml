@@ -26,7 +26,7 @@
   <version>0.0.1</version>
 
   <properties>
-    <camel.version>3.2.0</camel.version>
+    <camel.version>3.4.0-SNAPSHOT</camel.version>
     <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
     <project.build.targetJdk>11</project.build.targetJdk>
   </properties>

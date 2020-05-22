@@ -22,8 +22,7 @@ public class ProxyApp {
     public static void main(final String[] args) throws Exception {
         final Main main = new Main();
         try {
-            main.addRoutesBuilder(new ProxyRoute());
-
+            main.configure().addRoutesBuilder(new ProxyRoute());
             main.run();
         } finally {
             main.stop();
