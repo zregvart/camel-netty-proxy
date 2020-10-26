@@ -30,7 +30,7 @@ public class ProxyRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         final RouteDefinition from;
-        if (Files.exists(Path.of("/tls", "keystore.jks"))) {
+        if (Files.exists(keystorePath())) {
             from = from("netty-http:proxy://0.0.0.0:8443?ssl=true&keyStoreFile=/tls/keystore.jks&passphrase=changeit&trustStoreFile=/tls/keystore.jks");
         } else {
             from = from("netty-http:proxy://0.0.0.0:8080");
@@ -44,6 +44,10 @@ public class ProxyRoute extends RouteBuilder {
                 + "${headers." + Exchange.HTTP_PORT + "}"
                 + "${headers." + Exchange.HTTP_PATH + "}")
             .process(ProxyRoute::uppercase);
+    }
+
+    Path keystorePath() {
+        return Path.of("/tls", "keystore.jks");
     }
 
     public static void uppercase(final Exchange exchange) {

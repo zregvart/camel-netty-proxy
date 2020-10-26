@@ -16,14 +16,23 @@
  */
 package com.github.zregvart.cnp;
 
+import io.netty.handler.logging.LoggingHandler;
+
 import org.apache.camel.main.Main;
 
 public class ProxyApp {
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
         final Main main = new Main();
+        launch(main);
+    }
+
+    static void launch(final Main main) {
         try {
+            main.bind("logging-handler", new LoggingHandler());
             main.configure().addRoutesBuilder(new ProxyRoute());
             main.run();
+        } catch (final Exception e) {
+            throw new ExceptionInInitializerError(e);
         } finally {
             main.stop();
         }

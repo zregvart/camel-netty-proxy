@@ -1,6 +1,6 @@
 FROM openjdk:11 AS build
 WORKDIR /build
-COPY mvnw pom.xml srcdeps.yaml ./
+COPY mvnw pom.xml ./
 COPY .mvn ./.mvn/
 RUN ./mvnw -U -B -q dependency:go-offline
 COPY src src
